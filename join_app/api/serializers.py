@@ -1,5 +1,10 @@
 from rest_framework import serializers
-from join_app.models import Contact, Task
+from join_app.models import Contact, Task, User
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
 
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
