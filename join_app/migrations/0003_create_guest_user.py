@@ -1,0 +1,18 @@
+from django.db import migrations
+
+def create_guest_user(apps, schema_editor):
+    User = apps.get_model('join_app', 'User')
+    if not User.objects.filter(id=0).exists():
+        guest_user = User(id=0, username="Guest", email="guest@example.com", password="")
+        guest_user.set_unusable_password()
+        guest_user.save()
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('join_app', '0002_initial'),  # Ersetze 'previous_migration_file' durch die vorherige Migrationsdatei
+    ]
+
+    operations = [
+        migrations.RunPython(create_guest_user),
+    ]

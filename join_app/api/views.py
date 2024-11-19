@@ -1,10 +1,10 @@
 from rest_framework import viewsets
 from join_app.models import Contact, Task, User
-from join_app.api.serializers import ContactSerializer, TaskSerializer
+from join_app.api.serializers import ContactSerializer, TaskSerializer, UserSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    serializer_class = ContactSerializer
+    serializer_class = UserSerializer
 
 class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
