@@ -4,8 +4,7 @@ from join_app.models import Contact, Task, User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password']
-
+        fields = ['id', 'username', 'email', 'password', 'emblem', 'color']
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
