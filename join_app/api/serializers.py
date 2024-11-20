@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
-        fields = '__all__'
+        fields = ['id', 'name', 'email', 'phone', 'color', 'emblem']
         
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
