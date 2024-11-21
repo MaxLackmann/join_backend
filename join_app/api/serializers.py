@@ -11,6 +11,10 @@ class ContactSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'email', 'phone', 'color', 'emblem']
         
 class TaskSerializer(serializers.ModelSerializer):
+    userId = serializers.PrimaryKeyRelatedField(
+        many=True,
+        queryset=User.objects.all()
+    )
     class Meta:
         model = Task
         fields = '__all__'
