@@ -16,7 +16,7 @@ def create_guest_user(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('join_app', '0002_initial'),  # Ersetze 'previous_migration_file' durch die vorherige Migrationsdatei
+        ('join_app', '0001_initial'),  # Ersetze 'previous_migration_file' durch die vorherige Migrationsdatei
     ]
 
     operations = [
