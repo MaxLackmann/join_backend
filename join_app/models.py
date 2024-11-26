@@ -27,12 +27,27 @@ class Task(models.Model):
     cardId = models.AutoField(primary_key=True)  # Automatisch nicht null
     title = models.CharField(max_length=100)
     description = models.TextField()
-    userId = models.ManyToManyField(User, blank=True)
     date = models.DateField()
     priority = models.CharField(max_length=20, blank=True, null=True)
     category = models.CharField(max_length=100)
-    subtask = models.JSONField(blank=True, null=True)
     status = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title
+
+class TaskUser(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="task_users")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_tasks")
+    checked = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.task.title}"
+
+class Subtask(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="subtasks")
+    subtaskText = models.CharField(max_length=100)
+    checked = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.subtaskText
+
