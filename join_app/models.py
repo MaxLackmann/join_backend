@@ -14,11 +14,12 @@ class User (models.Model):
         return self.username
 
 class Contact (models.Model):
+    id = models.AutoField(primary_key=True)  # Standardmäßig primärer Schlüssel
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     phone = models.CharField(max_length=15)
     color = models.CharField(max_length=7, blank=True, null=True)
-    emblem = models.CharField(max_length=10, blank=True, null=True) 
+    emblem = models.CharField(max_length=10, blank=True, null=True)
     
     def __str__(self):
         return self.name
@@ -35,13 +36,17 @@ class Task(models.Model):
     def __str__(self):
         return self.title
 
-class TaskUser(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="task_users")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_tasks")
+class TaskContact(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="task_contacts")
+    contact = models.ForeignKey(Contact, on_delete=models.CASCADE, related_name="contact_tasks")
     checked = models.BooleanField(default=False)
 
+
+    class Meta:
+        unique_together = ('task', 'contact')  # Ein Task kann denselben Kontakt nicht mehrfach haben
+        
     def __str__(self):
-        return f"{self.user.username} - {self.task.title}"
+        return f"{self.contact.name} - {self.task.title}"
 
 class Subtask(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="subtasks")
